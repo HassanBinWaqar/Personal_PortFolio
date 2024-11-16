@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfolio - Testimonials</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Playfair+Display:wght@700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* General Styles */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        color: #333;
+        background-color: #f9f9f9;
+      }
+
+      .container {
+        display: flex;
+        width: 100%;
+        min-height: 100vh;
+      }
+
+      /* Sidebar Styles */
+      .sidebar {
+        background: #ffbf00;
+        flex: 1 1 100px; /* Adjusted width from 250px to 200px */
+        padding: 20px; /* Slightly reduced padding */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        box-shadow: 2px 0 15px rgba(0, 0, 0, 0.2);
+        border-radius: 8px;
+      }
+
+      .sidebar img {
+        width: 100%;
+        height: auto;
+        margin-bottom: 20px;
+        border-radius: 12px;
+      }
+
+      .sidebar nav {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        width: 100%;
+      }
+
+      .sidebar a {
+        text-decoration: none;
+        color: #333;
+        font-size: 18px;
+        font-weight: bold;
+        padding: 10px;
+        text-align: center;
+        border-radius: 5px;
+        background: rgba(255, 255, 255, 0.8);
+        transition: all 0.3s ease;
+      }
+
+      .sidebar a:hover {
+        background-color: rgba(255, 255, 255, 1);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+        transform: scale(1.05);
+      }
+
+      /* Main Content Styles */
+      .content {
+        flex: 3;
+        padding: 40px;
+        background: #f4f4f4;
+        border-radius: 12px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        margin: 20px;
+      }
+
+      .content h1 {
+        font-family: "Playfair Display", serif;
+        text-align: center;
+        font-size: 3rem;
+        border: 2px solid gray;
+        font-weight: 700;
+        color: #ffcc00;
+        margin-bottom: 40px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+      }
+
+      .testimonial-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+      }
+
+      .testimonial-card {
+        background-color: #fff;
+        border-radius: 12px;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        text-align: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .testimonial-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+      }
+
+      .testimonial-card .profile-pic {
+        width: 80px;
+        height: 80px;
+        margin: 0 auto 15px;
+        overflow: hidden;
+        border-radius: 50%;
+        border: 3px solid #ffbf00;
+      }
+
+      .testimonial-card .profile-pic img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .testimonial-card h3 {
+        margin: 10px 0;
+        font-size: 20px;
+        font-weight: 700;
+        color: #444;
+      }
+
+      .testimonial-card .review {
+        font-size: 16px;
+        color: #666;
+        line-height: 1.6;
+        margin-bottom: 15px;
+      }
+
+      .star-rating {
+        display: inline-flex;
+        justify-content: center;
+        margin: 10px 0;
+      }
+
+      .star-rating i {
+        color: #ffcc00;
+        font-size: 18px;
+        margin: 0 2px;
+      }
+
+      /* Social Media Icons */
+      .social-bar {
+        position: fixed;
+        top: 50%;
+        right: 0;
+        transform: translateY(-50%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: #ffbf00;
+        padding: 10px;
+        border-radius: 10px 0 0 10px;
+        box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .social-bar a {
+        position: relative;
+        margin: 10px 0;
+        text-align: center;
+        color: #fff;
+        font-size: 20px;
+        display: block;
+        transition: all 0.3s ease;
+      }
+
+      .social-bar a:hover {
+        transform: scale(1.2);
+      }
+
+      .social-bar i {
+        font-size: 24px;
+      }
+
+      .social-bar a:hover::after {
+        content: attr(data-tooltip);
+        position: absolute;
+        right: 100%;
+        margin-right: 10px;
+        background-color: #333;
+        color: #fff;
+        padding: 5px 10px;
+        border-radius: 5px;
+        white-space: nowrap;
+        font-size: 14px;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .content {
+          padding: 20px;
+        }
+
+        .testimonial-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .social-bar {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <img src="img1.jpeg" alt="Profile Picture" />
+        <nav>
+          <a href="javascript:void(0);" id="home">Home</a>
+          <a href="javascript:void(0);" id="about">About</a>
+          <a href="javascript:void(0);" id="portfolio">Portfolio</a>
+          <a href="javascript:void(0);" id="contact">Contact</a>
+          <a href="javascript:void(0);" id="home_back">Back to Home</a>
+        </nav>
+      </div>
+
+   <!-- Main Content -->
+<main class="content">
+    <h1>Testimonials</h1>
+    <div class="testimonial-grid">
+      <div class="testimonial-card">
+        <div class="profile-pic">
+          <img src="customer1.jpg" alt="Customer 1" />
+        </div>
+        <h3>John Doe</h3>
+        <p class="review">
+          "Fantastic service! Highly recommend to everyone."
+        </p>
+        <div class="star-rating">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star-half-alt"></i>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="profile-pic">
+          <img src="customer2.avif" alt="Customer 2" />
+        </div>
+        <h3>Jane Smith</h3>
+        <p class="review">
+          "Great experience and wonderful support throughout."
+        </p>
+        <div class="star-rating">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="profile-pic">
+          <img src="customer3.jpeg" alt="Customer 3" />
+        </div>
+        <h3>Emily Davis</h3>
+        <p class="review">
+          "The attention to detail was impressive. I'm thrilled with the results!"
+        </p>
+        <div class="star-rating">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="profile-pic">
+          <img src="customer4.jpeg" alt="Customer 4" />
+        </div>
+        <h3>Michael Brown</h3>
+        <p class="review">
+          "Outstanding quality and great communication throughout the process."
+        </p>
+        <div class="star-rating">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star-half-alt"></i>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="profile-pic">
+          <img src="customer5.jpeg" alt="Customer 5" />
+        </div>
+        <h3>Sophia Martinez</h3>
+        <p class="review">
+          "Highly professional team. Will definitely work with them again!"
+        </p>
+        <div class="star-rating">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="profile-pic">
+          <img src="customer6.jpeg" alt="Customer 6" />
+        </div>
+        <h3>Oliver Wilson</h3>
+        <p class="review">
+          "A seamless experience from start to finish. Exceptional work!"
+        </p>
+        <div class="star-rating">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+        </div>
+      </div>
+    </div>
+  </main>
+  
+    </div>
+
+    <!-- Social Media Icons -->
+    <div class="social-bar">
+      <a
+        href="https://github.com/HassanBinWaqar"
+        target="_blank"
+        data-tooltip="GitHub"
+        ><i class="fab fa-github"></i
+      ></a>
+      <a
+        href="https://www.linkedin.com/in/hassanbinwaqar/"
+        target="_blank"
+        data-tooltip="LinkedIn"
+        ><i class="fab fa-linkedin"></i
+      ></a>
+      <a
+        href="https://x.com/BinWaqar1?s=08"
+        target="_blank"
+        data-tooltip="Twitter"
+        ><i class="fab fa-twitter"></i
+      ></a>
+      <a
+        href="https://www.facebook.com/hassan.meer.5268"
+        target="_blank"
+        data-tooltip="Facebook"
+        ><i class="fab fa-facebook-f"></i
+      ></a>
+      <a
+        href="https://www.instagram.com/meer_419"
+        target="_blank"
+        data-tooltip="Instagram"
+        ><i class="fab fa-instagram"></i
+      ></a>
+    </div>
+    <script>
+         document.getElementById('home').onclick = function() {
+            window.location.href = 'index.html';
+        };
+        document.getElementById('about').onclick = function() {
+            window.location.href = 'about.html';
+        };
+     
+        document.getElementById('portfolio').onclick = function() {
+            window.location.href = 'portfolio.html';
+        };
+        document.getElementById('contact').onclick = function() {
+            window.location.href = 'contact.html';
+        };
+        document.getElementById('home_back').onclick = function() {
+            window.location.href = 'index.html';
+        };
+    </script>
+  </body>
+</html>

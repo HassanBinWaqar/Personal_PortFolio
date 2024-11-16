@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    /* Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      display: flex;
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      background: linear-gradient(135deg, #f8c14b, #ffbf00);
+      width: 250px;
+      padding: 30px 20px;
+      text-align: center;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      box-shadow: 2px 0 15px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Profile picture full-width */
+    .profile-pic {
+      width: 100%;
+      margin-bottom: 20px;
+      transition: transform 0.3s ease;
+      box-shadow: none;
+    }
+
+    .profile-pic img {
+      width: 100%;
+      height: auto;
+      margin-bottom: 20px;
+      border-radius: 12px;
+    }
+
+    .profile-pic:hover {
+      transform: scale(1.05);
+    }
+
+    /* Menu */
+    .menu {
+      list-style-type: none;
+      width: 100%;
+    }
+
+    .menu li {
+      margin: 20px 0;
+    }
+
+    .menu li a {
+      text-decoration: none;
+      color: #333;
+      font-weight: bold;
+      display: block;
+      padding: 12px;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .menu li a:hover,
+    .menu li.active a {
+      background-color: #333;
+      color: #f8c14b;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      transform: translateX(5px);
+    }
+
+    .menu li a::before {
+      content: "\f105";
+      font-family: "Font Awesome 5 Free";
+      font-weight: 900;
+      margin-right: 8px;
+      transition: margin-right 0.3s;
+    }
+
+    .menu li a:hover::before {
+      margin-right: 12px;
+    }
+
+    /* Portfolio Section */
+    .portfolio-section {
+      flex: 1;
+      padding: 40px;
+    }
+
+    .portfolio-heading {
+      font-size: 36px;
+      font-weight: bold;
+      border: 2px solid grey;
+      text-align: center;
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    .filter-menu {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .filter-btn {
+      background: none;
+      border: none;
+      font-size: 16px;
+      padding: 10px 15px;
+      cursor: pointer;
+      color: #333;
+      transition: color 0.3s ease;
+    }
+
+    .filter-btn.active {
+      color: #f8c14b;
+      font-weight: bold;
+      text-decoration: underline;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 20px;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .gallery-item img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Social Media Sidebar */
+    .social-bar {
+      position: fixed;
+      top: 50%;
+      right: 0;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: #ffbf00;
+      padding: 10px;
+      border-radius: 10px 0 0 10px;
+      box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .social-bar a {
+      position: relative;
+      margin: 10px 0;
+      color: #fff;
+      font-size: 20px;
+      transition: transform 0.3s ease, background-color 0.3s ease;
+    }
+
+    .social-bar a:hover {
+      transform: scale(1.2);
+    }
+
+    .social-bar a:hover::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      right: 100%;
+      margin-right: 10px;
+      background-color: #333;
+      color: #fff;
+      padding: 5px 10px;
+      border-radius: 5px;
+      white-space: nowrap;
+      font-size: 14px;
+    }
+
+    /* Responsive Design */
+    @media screen and (max-width: 768px) {
+      body {
+        flex-direction: column;
+      }
+
+      .sidebar {
+        width: 100%;
+        height: auto;
+        padding: 20px;
+      }
+
+      .profile-pic img {
+        width: 80%;
+        height: auto;
+      }
+
+      .portfolio-section {
+        padding: 20px;
+      }
+
+      .portfolio-heading {
+        font-size: 28px;
+      }
+
+      .menu li {
+        margin: 15px 0;
+      }
+
+      .gallery {
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+      }
+
+      .social-bar {
+        top: auto;
+        bottom: 0;
+        right: 0;
+        transform: translateY(0);
+      }
+    }
+
+    @media screen and (max-width: 480px) {
+      .portfolio-heading {
+        font-size: 24px;
+      }
+
+      .gallery {
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+      }
+
+      .filter-btn {
+        font-size: 14px;
+        padding: 8px 12px;
+      }
+
+      .menu li a {
+        font-size: 14px;
+        padding: 10px;
+      }
+    }
+
+  </style>
+</head>
+<body>
+  <!-- Sidebar Navigation -->
+  <div class="sidebar">
+    <div class="profile-pic">
+      <img src="img1.jpeg" alt="Profile Image">
+    </div>
+    <ul class="menu">
+      <li><a href="javascript:void(0);" id="home">Home</a></li>
+      <li><a href="javascript:void(0);" id="about">About Me</a></li>
+      <li><a href="javascript:void(0);" id="resume">Resume</a></li>
+      <li class="active"><a href="javascript:void(0);" id="portfolio">Portfolio</a></li>
+      <li><a href="javascript:void(0);" id="testimonial">Testimonials</a></li>
+      <li><a href="javascript:void(0);" id="contact">Contact</a></li>
+    </ul>
+  </div>
+
+  <!-- Portfolio Section -->
+  <div class="portfolio-section">
+    <h1 class="portfolio-heading">PORTFOLIO</h1>
+    <div class="filter-menu">
+      <button class="filter-btn active" onclick="filterSelection('all')">All</button>
+      <button class="filter-btn" onclick="filterSelection('WeatherAPP')">WeatherAPP</button>
+      <button class="filter-btn" onclick="filterSelection('HubScout')">HubScout</button>
+      <button class="filter-btn" onclick="filterSelection('Parallax-Travel')">Parallax-Travel</button>
+      <button class="filter-btn" onclick="filterSelection('ExpenseTracker')">ExpenseTracker</button>
+    </div>
+
+    <div class="gallery">
+        <div class="gallery-item WeatherAPP">
+          <a href="https://github.com/HassanBinWaqar/Weather-App" target="_blank">
+            <img src="Weather.png" alt="WeatherAPP">
+          </a>
+        </div>
+        <div class="gallery-item HubScout">
+          <a href="https://github.com/HassanBinWaqar/HubScout" target="_blank">
+            <img src="hub.png" alt="HubScout">
+          </a>
+        </div>
+        <div class="gallery-item Parallax-Travel">
+          <a href="https://github.com/HassanBinWaqar/Parallax-Travel" target="_blank">
+            <img src="Parallax.png" alt="Parallax-Travel">
+          </a>
+        </div>
+        <div class="gallery-item ExpenseTracker">
+          <a href="https://github.com/HassanBinWaqar/Daily-Expense-Tracker" target="_blank">
+            <img src="E.png" alt="ExpenseTracker">
+          </a>
+        </div>
+      </div>
+      
+  </div>
+
+  <!-- Social Media Sidebar -->
+  <div class="social-bar">
+    <a href="https://github.com/HassanBinWaqar" target="_blank" data-tooltip="GitHub"><i class="fab fa-github"></i></a>
+    <a href="https://www.linkedin.com/in/hassanbinwaqar/" target="_blank" data-tooltip="LinkedIn"><i class="fab fa-linkedin"></i></a>
+    <a href=" https://x.com/BinWaqar1?s=08" target="_blank" data-tooltip="Twitter"><i class="fab fa-twitter"></i></a>
+    <a href="https://www.facebook.com/hassan.meer.5268" target="_blank" data-tooltip="Facebook"><i class="fab fa-facebook-f"></i></a>
+    <a href="https://www.instagram.com/hassanbinnwaqar/" target="_blank" data-tooltip="Instagram"><i class="fab fa-instagram"></i></a>
+</div>
+
+
+  <script>
+    // Filter functionality for portfolio items
+    function filterSelection(category) {
+      var items = document.querySelectorAll('.gallery-item');
+      items.forEach(function(item) {
+        if (category === 'all' || item.classList.contains(category)) {
+          item.style.display = 'block';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+      // Highlight the active button
+      var buttons = document.querySelectorAll('.filter-btn');
+      buttons.forEach(function(btn) {
+        btn.classList.remove('active');
+      });
+      event.target.classList.add('active');
+    }
+    document.getElementById('home').onclick = function() {
+            window.location.href = 'index.html';
+        };
+    document.getElementById('about').onclick = function() {
+            window.location.href = 'about.html';
+        };
+    document.getElementById('portfolio').onclick = function() {
+            window.location.href = 'portfolio.html';
+        };
+    document.getElementById('contact').onclick = function() {
+            window.location.href = 'contact.html';
+        };
+        document.getElementById('resume').onclick = function() {
+            window.location.href = 'Resume.html';
+        };
+        document.getElementById('testimonial').onclick = function() {
+            window.location.href = 'testimonial.html';
+        };
+  </script>
+</body>
+</html>

@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfolio - Resume Section</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Playfair+Display:wght@700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* General Styles */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        display: flex;
+        font-family: "Inter", sans-serif;
+        color: #333;
+        background-color: #f9f9f9;
+      }
+
+      .container {
+        display: flex;
+        width: 100%;
+      }
+
+      /* Sidebar Styles */
+      .sidebar {
+        background: #ffbf00;
+        flex: 1 1 250px;
+        padding: 30px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        box-shadow: 2px 0 15px rgba(0, 0, 0, 0.2);
+        border-radius: 8px;
+      }
+
+      .sidebar img {
+        width: 100%;
+        height: auto;
+        margin-bottom: 20px;
+        border-radius: 12px;
+      }
+
+      .sidebar nav {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        width: 100%;
+      }
+
+      .sidebar a {
+        text-decoration: none;
+        color: #333;
+        font-size: 18px;
+        font-weight: bold;
+        padding: 10px;
+        text-align: center;
+        border-radius: 5px;
+        background: rgba(255, 255, 255, 0.8);
+        transition: all 0.3s ease;
+      }
+
+      .sidebar a:hover {
+        background-color: rgba(255, 255, 255, 1);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+        transform: scale(1.05);
+      }
+      /* Main Content Styles */
+      .content {
+        width: 75%;
+        padding: 40px;
+      }
+
+      .content h1 {
+        font-family: "Playfair Display", serif;
+        text-align: center;
+        border: 2px solid grey;
+        font-size: 3rem;
+        font-weight: 700;
+        color: #ffcc00;
+        margin-bottom: 30px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+      }
+
+      .section {
+        margin-bottom: 40px;
+      }
+
+      .section h2 {
+        font-size: 1.8rem;
+        font-weight: 700;
+        margin-bottom: 20px;
+        color: #444;
+      }
+
+      .details {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+      }
+
+      .details .card {
+        width: calc(50% - 10px);
+        background: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .details .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+      }
+
+      .details .card h3 {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 10px;
+      }
+
+      .details .card p {
+        font-size: 1rem;
+        color: #666;
+      }
+
+      /* Download Resume Button Styling */
+      .below_container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+
+      /* Download Resume Button Styling */
+      .download-btn {
+        display: inline-block;
+        background-color: #ffbf00;
+        color: #fff;
+        padding: 15px 30px;
+        font-size: 1.2rem;
+        font-weight: bold;
+        text-transform: uppercase;
+        border-radius: 5px;
+        text-decoration: none;
+        text-align: center;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        transition: all 0.3s ease;
+      }
+
+      .download-btn:hover {
+        background-color: #ff9f00;
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      }
+
+      /* Social Icons */
+      .social-bar {
+        position: fixed;
+        top: 50%;
+        right: 0;
+        transform: translateY(-50%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: #ffbf00;
+        padding: 10px;
+        border-radius: 10px 0 0 10px;
+        box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .social-bar a {
+        position: relative;
+        margin: 10px 0;
+        text-align: center;
+        color: #fff;
+        font-size: 20px;
+        display: block;
+        transition: all 0.3s ease;
+      }
+
+      .social-bar a:hover {
+        transform: scale(1.2);
+      }
+
+      .social-bar i {
+        font-size: 24px;
+      }
+
+      .social-bar a:hover::after {
+        content: attr(data-tooltip);
+        position: absolute;
+        right: 100%;
+        margin-right: 10px;
+        background-color: #333;
+        color: #fff;
+        padding: 5px 10px;
+        border-radius: 5px;
+        white-space: nowrap;
+        font-size: 14px;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .sidebar {
+          width: 100%;
+          height: auto;
+          padding: 10px;
+        }
+
+        .sidebar img {
+            width: 100%;
+            height: auto;
+        }
+
+        .content {
+          width: 100%;
+          padding: 20px;
+        }
+
+        .details .card {
+          width: 100%;
+        }
+
+        .social-icons {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <img src="img1.jpeg" alt="Profile Picture" />
+        <nav>
+          <a href="javascript:void(0);" id="home">Home</a>
+          <a href="javascript:void(0);" id="about">About</a>
+          <a href="javascript:void(0);" id="portfolio">Portfolio</a>
+          <a href="javascript:void(0);" id="contact">Contact</a>
+          <a href="javascript:void(0);" id="home_back">Back to Home</a>
+        </nav>
+      </div>
+
+      <!-- Main Content -->
+      <main class="content">
+        <h1>Resume</h1>
+
+        <!-- Education Section -->
+        <section class="section" id="education">
+          <h2>Education</h2>
+          <div class="details">
+            <div class="card">
+              <h3>National University of Modern Languages</h3>
+              <p>
+                Bachelor of Science in Software Engineering - Graduated with
+                Distinction.
+              </p>
+            </div>
+            <div class="card">
+              <h3>Rouse House Grammar</h3>
+              <p>Higher Secondary Education with an A+ Grade.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section class="section" id="experience">
+          <h2>Experience</h2>
+          <div class="details">
+            <div class="card">
+              <h3>Bytewise Ltd.</h3>
+              <p>
+                Frontend Development Intern - Built responsive and engaging web
+                applications.
+              </p>
+            </div>
+            <div class="card">
+              <h3>HubScout Project</h3>
+              <p>
+                Developed a GitHub user finder app with advanced theme toggling
+                features.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Download Resume Button -->
+        <div class="below_container">
+            <!-- Download Resume Button -->
+            <a href="https://drive.google.com/uc?export=download&id=18zWmU513dKbGc2vZL7C9Cup16H7qNUYp" class="download-btn" download>
+              <i class="fas fa-download"></i> Download Resume
+            </a>
+          </div>
+      </main>
+    </div>
+
+       <!-- Social Media Icons -->
+       <div class="social-bar">
+        <a
+          href="https://github.com/HassanBinWaqar"
+          target="_blank"
+          data-tooltip="GitHub"
+          ><i class="fab fa-github"></i
+        ></a>
+        <a
+          href="https://www.linkedin.com/in/hassanbinwaqar/"
+          target="_blank"
+          data-tooltip="LinkedIn"
+          ><i class="fab fa-linkedin"></i
+        ></a>
+        <a
+          href=" https://x.com/BinWaqar1?s=08"
+          target="_blank"
+          data-tooltip="Twitter"
+          ><i class="fab fa-twitter"></i
+        ></a>
+        <a
+          href="https://www.facebook.com/hassan.meer.5268"
+          target="_blank"
+          data-tooltip="Facebook"
+          ><i class="fab fa-facebook-f"></i
+        ></a>
+        <a
+          href="https://www.instagram.com/hassanbinnwaqar/"
+          target="_blank"
+          data-tooltip="Instagram"
+          ><i class="fab fa-instagram"></i
+        ></a>
+      </div>
+      <script>
+              document.getElementById('home').onclick = function() {
+            window.location.href = 'index.html';
+        };
+        document.getElementById('about').onclick = function() {
+            window.location.href = 'about.html';
+        };
+     
+        document.getElementById('portfolio').onclick = function() {
+            window.location.href = 'portfolio.html';
+        };
+        document.getElementById('contact').onclick = function() {
+            window.location.href = 'contact.html';
+        };
+        document.getElementById('home_back').onclick = function() {
+            window.location.href = 'index.html';
+        };
+      </script>
+  </body>
+</html>
